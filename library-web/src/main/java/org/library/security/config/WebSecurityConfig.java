@@ -1,4 +1,4 @@
-package com.boraji.tutorial.security.config;
+package org.library.security.config;
 
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;

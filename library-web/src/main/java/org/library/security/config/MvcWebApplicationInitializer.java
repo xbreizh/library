@@ -1,4 +1,4 @@
-package com.boraji.tutorial.security.config;
+package org.library.security.config;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 

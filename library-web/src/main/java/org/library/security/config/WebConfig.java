@@ -1,4 +1,4 @@
-package com.boraji.tutorial.security.config;
+package org.library.security.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -8,7 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 
 @Configuration
 @EnableWebMvc
-@ComponentScan(basePackages = { "com.boraji.tutorial.spring.controller" })
+@ComponentScan(basePackages = { "org.library.spring.controller" })
 public class WebConfig extends WebMvcConfigurerAdapter {
    @Override
    public void configureViewResolvers(ViewResolverRegistry registry) {

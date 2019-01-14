@@ -6,10 +6,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>BORAJI.COM</title>
+<title>LIBRARY</title>
 </head>
 <body>
-  <h2>Spring Security 4 - Hello World Example</h2>
+  <h2>Library - Example</h2>
   <hr />
   <h3>
     Welcome !

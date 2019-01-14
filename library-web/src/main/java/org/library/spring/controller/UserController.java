@@ -1,4 +1,4 @@
-package com.boraji.tutorial.spring.controller;
+package org.library.spring.controller;
 
 import java.security.Principal;
 
