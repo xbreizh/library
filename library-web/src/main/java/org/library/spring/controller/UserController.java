@@ -2,7 +2,7 @@ package org.library.spring.controller;
 
 import java.security.Principal;
 
-import contract.BookManager;
+import org.library.contract.BookManager;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -13,11 +13,12 @@ import javax.inject.Inject;
 @Controller
 public class UserController {
 
-  /* @Inject
-   BookManager bookManager;*/
+   @Inject
+   BookManager bookManager;
 
    @GetMapping("/")
    public String index() {
+       bookManager.trok();
       return "index";
    }
 
