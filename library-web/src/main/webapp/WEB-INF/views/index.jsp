@@ -22,7 +22,7 @@
     </security:authorize>
   </h3>
   <security:authorize access="isAnonymous()">
-    Login as <a href="user">User</a> or <a href="/admin">Admin</a>
+    Login as <a href="user">User</a> or <a href="admin">Admin</a>
   </security:authorize>
   <security:authorize access="isAuthenticated()">
     <security:authorize access="hasRole('USER')">
