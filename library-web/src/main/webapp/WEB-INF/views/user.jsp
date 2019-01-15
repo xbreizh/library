@@ -1,5 +1,6 @@
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+<%--<%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>--%>
 <!DOCTYPE html >
 <html>
 <head>
@@ -7,11 +8,11 @@
 <title>BORAJI.COM</title>
 </head>
 <body>
-  <h2>Spring Security 4 - Hello World Example</h2>
+  <h2>User Page</h2>
   <hr />
   <h3>User dashboard  </h3>
   <security:authorize access="isAuthenticated()">
-     <b>Welcome! <security:authentication property="principal.username" /></b>
+    <%-- <b>Welcome! <security:authentication property="principal.username" /></b>--%>
   </security:authorize>
   <br />
   <security:authorize access="isAuthenticated()">

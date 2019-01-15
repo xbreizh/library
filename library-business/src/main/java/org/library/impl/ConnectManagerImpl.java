@@ -27,16 +27,26 @@ public class ConnectManagerImpl implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         System.out.println(authentication.getPrincipal());
-        if(authentication.getPrincipal().toString().toUpperCase().equals("LOKI")) {
-            Authentication auth = new UsernamePasswordAuthenticationToken("loki", "123", Collections.<GrantedAuthority>emptyList());
+        Collection<? extends GrantedAuthority> authorities = buildUserAuthority(memberManager.getMember(1));
+
+        if (authentication.getPrincipal().toString().toUpperCase().equals("USER")) {
+            Authentication auth = new UsernamePasswordAuthenticationToken("user",  "{noop}123", authorities);
+
+            System.out.println("trucko: "+auth.getAuthorities());
+            System.out.println("cred: "+auth.getCredentials());
+            System.out.println("login: "+auth.getName());
             return auth;
-        }else{
+        } else if (authentication.getPrincipal().toString().toUpperCase().equals("MOLGO")) {
+            Authentication auth = new UsernamePasswordAuthenticationToken("loki", "{noop}458", authorities);
+            return auth;
+        } else {
             throw new
                     BadCredentialsException("External system authentication failed");
 
-            }
+        }
 
     }
+
 
     @Override
     public boolean supports(Class<?> auth) {
@@ -54,7 +64,7 @@ public class ConnectManagerImpl implements AuthenticationProvider {
 
     private User buildUser(){
         Member m = memberManager.getMember(1);
-        List<GrantedAuthority> authorities = buildUserAuthority(m);
+        Collection<GrantedAuthority> authorities = buildUserAuthority(m);
         System.out.println("building user");
         User user = new User(m.getLogin(), m.getToken(),authorities);
         return user;
@@ -73,15 +83,15 @@ public class ConnectManagerImpl implements AuthenticationProvider {
 
 
 
-    private List<GrantedAuthority> buildUserAuthority(Member m) {
+    private Collection<GrantedAuthority> buildUserAuthority(Member m) {
 
         Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 
         // Build user's authorities
         setAuths.add(new SimpleGrantedAuthority(m.getRole()));
 
-        List<GrantedAuthority> result = new ArrayList<GrantedAuthority>(setAuths);
-        System.out.println("result: "+result.get(0));
+        Collection<GrantedAuthority> result = new ArrayList<GrantedAuthority>(setAuths);
+        System.out.println("result: "+((ArrayList<GrantedAuthority>) result).get(0));
 
         return result;
     }

@@ -13,7 +13,7 @@
   <hr />
   <h3>Admin dashboard</h3>
   <security:authorize access="isAuthenticated()">
-    <b>Welcome! <security:authentication property="principal.username" /></b>
+   <%-- <b>Welcome! <security:authentication property="principal.username" /></b>--%>
   </security:authorize>
   <br />
   <security:authorize access="isAuthenticated()">

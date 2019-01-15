@@ -13,8 +13,7 @@ import javax.inject.Inject;
 @Controller
 public class UserController {
 
-   @Inject
-   BookManager bookManager;
+
 
    @GetMapping("/")
    public String index() {
@@ -22,19 +21,22 @@ public class UserController {
       return "index";
    }
 
-   @GetMapping("/user")
+   @GetMapping("/connect")
    public String user(Principal principal) {
       // Get authenticated user name from Principal
-      bookManager.trok();
+      System.out.println("trying to get to user");
       System.out.println(principal.getName());
-      return "user";
+      System.out.println("role: "+principal.toString());
+
+      System.out.println("principal: "+principal);
+      return "index";
    }
 
-   @GetMapping("/admin")
+   @GetMapping("/result")
    public String admin() {
       // Get authenticated user name from SecurityContext
       SecurityContext context = SecurityContextHolder.getContext();
       System.out.println(context.getAuthentication().getName());
-      return "admin";
+      return "result";
    }
 }

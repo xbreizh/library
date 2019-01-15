@@ -9,7 +9,7 @@
 <title>LIBRARY</title>
 </head>
 <body>
-  <h2>Library - Example</h2>
+  <h2>Library - Result page</h2>
   <hr />
   <h3>
     Welcome !
@@ -19,14 +19,14 @@
     <!-- Print the logged in user name -->
     <security:authorize access="isAuthenticated()">
       <security:authentication property="principal" />
+      authenticated!
     </security:authorize>
   </h3>
   <security:authorize access="isAnonymous()">
-    Connection <a href="connect">User</a>
+    Login as <a href="result">User</a> or <a href="admin">Admin</a>
   </security:authorize>
   <security:authorize access="isAuthenticated()">
-
-    <a href="result">My results</a><br>
+   My Profile
     <a href="logout">Logout</a>
   </security:authorize>
 </body>
