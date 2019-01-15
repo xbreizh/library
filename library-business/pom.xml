@@ -12,6 +12,7 @@
     <artifactId>library-business</artifactId>
 
     <dependencies>
+        <!-- ===== Modules ===== -->
         <dependency>
             <groupId>org.library</groupId>
             <artifactId>library-service</artifactId>
@@ -47,6 +48,10 @@
             <artifactId>spring-security-core</artifactId>
             <version>${spring-security.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>1</version>
+        </dependency>
     </dependencies>
 </project>

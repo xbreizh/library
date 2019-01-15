@@ -11,6 +11,7 @@
 
     <properties>
         <projectName>library</projectName>
+        <project.version>1.0-SNAPSHOT</project.version>
         <failOnMissingWebXml>false</failOnMissingWebXml>
         <cxf.version>3.2.7</cxf.version>
         <jdk.version>1.8</jdk.version>

@@ -2,13 +2,19 @@ package org.library.spring.controller;
 
 import java.security.Principal;
 
+import contract.BookManager;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.inject.Inject;
+
 @Controller
 public class UserController {
+
+  /* @Inject
+   BookManager bookManager;*/
 
    @GetMapping("/")
    public String index() {
