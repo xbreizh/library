@@ -18,13 +18,14 @@ public class UserController {
 
    @GetMapping("/")
    public String index() {
-       bookManager.trok();
+
       return "index";
    }
 
    @GetMapping("/user")
    public String user(Principal principal) {
       // Get authenticated user name from Principal
+      bookManager.trok();
       System.out.println(principal.getName());
       return "user";
    }

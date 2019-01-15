@@ -18,7 +18,7 @@
      </security:authorize>
     <!-- Print the logged in user name -->
     <security:authorize access="isAuthenticated()">
-      <security:authentication property="principal.username" />
+     <%-- <security:authentication property="principal.login" />--%>
     </security:authorize>
   </h3>
   <security:authorize access="isAnonymous()">
