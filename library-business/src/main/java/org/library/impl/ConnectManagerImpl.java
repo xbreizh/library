@@ -13,6 +13,10 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.troparo.entities.connect.GetTokenRequestType;
+import org.troparo.entities.connect.GetTokenResponseType;
+import org.troparo.services.connectservice.BusinessException;
+import org.troparo.services.connectservice.ConnectService;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -24,22 +28,37 @@ public class ConnectManagerImpl implements AuthenticationProvider {
     @Inject
     MemberManager memberManager;
 
+    private String token;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         System.out.println(authentication.getPrincipal());
+        ConnectService cs = new ConnectService();
+        GetTokenRequestType t = new GetTokenRequestType();
+        String login = authentication.getName().toUpperCase();
+        String password = (String) authentication.getCredentials();
+        t.setLogin(login);
+        t.setPassword(password);
+        System.out.println("login: "+login+" \n passwordd: "+password);
+        try {
+            GetTokenResponseType responseType = cs.getConnectServicePort().getToken(t);
+            token = responseType.getReturn();
+        } catch (BusinessException e) {
+            e.printStackTrace();
+            System.out.println("issue while trying to get the token");
+
+        }
+        System.out.println("token found: "+token);
         Collection<? extends GrantedAuthority> authorities = buildUserAuthority(memberManager.getMember(1));
 
-        if (authentication.getPrincipal().toString().toUpperCase().equals("USER")) {
-            Authentication auth = new UsernamePasswordAuthenticationToken("user",  "{noop}123", authorities);
+        if (token!=null) {
+            Authentication auth = new UsernamePasswordAuthenticationToken(login,  token, authorities);
 
             System.out.println("trucko: "+auth.getAuthorities());
             System.out.println("cred: "+auth.getCredentials());
             System.out.println("login: "+auth.getName());
             return auth;
-        } else if (authentication.getPrincipal().toString().toUpperCase().equals("MOLGO")) {
-            Authentication auth = new UsernamePasswordAuthenticationToken("loki", "{noop}458", authorities);
-            return auth;
-        } else {
+        }  else {
             throw new
                     BadCredentialsException("External system authentication failed");
 
