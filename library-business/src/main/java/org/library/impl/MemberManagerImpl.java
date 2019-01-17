@@ -21,9 +21,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Logger;
 
 @Named
 public class MemberManagerImpl implements MemberManager {
+    private Logger logger = Logger.getLogger(this.getClass().getName());
 
     private String token="";
     private String login="";
@@ -35,8 +37,8 @@ public class MemberManagerImpl implements MemberManager {
     public Member getMember(SecurityContext context) {
             token = context.getAuthentication().getDetails().toString();
             login = context.getAuthentication().getPrincipal().toString();
-        System.out.println("token: "+token);
-        System.out.println("login: "+login);
+        logger.info("token: "+token);
+        logger.info("login: "+login);
         try {
             MemberService memberService = new MemberService();
             GetMemberByLoginRequestType requestType= new GetMemberByLoginRequestType();
@@ -44,13 +46,13 @@ public class MemberManagerImpl implements MemberManager {
             requestType.setLogin(login);
             /*memberService.getMemberServicePort().getMemberByLogin(requestType);*/
             GetMemberByLoginResponseType responseType = memberService.getMemberServicePort().getMemberByLogin(requestType);
-            System.out.println("response: "+responseType.getMemberTypeOut().getEmail());
+            logger.info("response: "+responseType.getMemberTypeOut().getEmail());
             memberTypeOut = responseType.getMemberTypeOut();
 
             // converting into Member
             member = convertMemberTypeOutIntoMember( memberTypeOut);
         }catch (NullPointerException e){
-            System.out.println("Issue while trying to get member details");
+            logger.info("Issue while trying to get member details");
         } catch (BusinessExceptionMember businessExceptionMember) {
             businessExceptionMember.printStackTrace();
         }
@@ -74,7 +76,7 @@ public class MemberManagerImpl implements MemberManager {
         member.setDateJoin(date);
         member.setRole(memberTypeOut.getRole());
 
-        System.out.println("member from business: " +member);
+        logger.info("member from business: " +member);
         return member;
     }
 

@@ -22,42 +22,44 @@ import org.troparo.services.connectservice.ConnectService;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.util.*;
+import java.util.logging.Logger;
 
 @Named
 public class ConnectManagerImpl implements AuthenticationProvider {
 
+
     @Inject
     MemberManager memberManager;
-
+    private Logger logger = Logger.getLogger(this.getClass().getName());
     private String token;
     private final String role = "USER";
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        System.out.println(authentication.getPrincipal());
+        logger.info(authentication.getPrincipal().toString());
         ConnectService cs = new ConnectService();
         GetTokenRequestType t = new GetTokenRequestType();
         String login = authentication.getName().toUpperCase();
         String password = (String) authentication.getCredentials();
         t.setLogin(login);
         t.setPassword(password);
-        System.out.println("login: "+login+" \n passwordd: "+password);
+        logger.info("login: "+login+" \n passwordd: "+password);
         try {
             GetTokenResponseType responseType = cs.getConnectServicePort().getToken(t);
             token = responseType.getReturn();
         } catch (BusinessException e) {
             e.printStackTrace();
-            System.out.println("issue while trying to get the token");
+            logger.info("issue while trying to get the token");
 
         }
-        System.out.println("token found: "+token);
+        logger.info("token found: "+token);
 
 
         if (!token.equals("wrong login or pwd")) {
             Authentication auth = new UsernamePasswordAuthenticationToken(login,  token, buildUserAuthority());
-            System.out.println("trucko: "+auth.getAuthorities());
-            System.out.println("cred: "+auth.getCredentials());
-            System.out.println("login: "+auth.getName());
+            logger.info("trucko: "+auth.getAuthorities());
+            logger.info("cred: "+auth.getCredentials());
+            logger.info("login: "+auth.getName());
 
             ((UsernamePasswordAuthenticationToken) auth).setDetails(token);
             return auth;
@@ -87,7 +89,7 @@ public class ConnectManagerImpl implements AuthenticationProvider {
         setAuths.add(new SimpleGrantedAuthority(role));
 
         Collection<GrantedAuthority> result = new ArrayList<GrantedAuthority>(setAuths);
-        System.out.println("result: "+((ArrayList<GrantedAuthority>) result).get(0));
+        logger.info("result: "+((ArrayList<GrantedAuthority>) result).get(0));
 
         return result;
     }

@@ -14,6 +14,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.inject.Inject;
 import javax.inject.Named;
+import java.util.logging.Logger;
 
 @EnableWebSecurity
 @ComponentScan(basePackages = { "org.library" })
@@ -22,6 +23,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
    AuthenticationProvider authenticationProvider;
    @Inject
    PasswordEncoder passwordEncoder;
+
+   private Logger logger = Logger.getLogger(this.getClass().getName());
 
    @Override
    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -45,7 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
    @Override
    protected void configure(HttpSecurity http) throws Exception {
-       System.out.println("http: "+http);
+       logger.info("http: "+http);
       http.authorizeRequests().antMatchers("/").authenticated()
       .and()
       .authorizeRequests().antMatchers("/user**").authenticated()

@@ -1,8 +1,9 @@
 package org.library.spring.controller;
 
 import java.security.Principal;
+import java.util.logging.Logger;
 
-import org.library.contract.BookManager;
+
 import org.library.contract.MemberManager;
 import org.library.model.Member;
 import org.springframework.security.core.context.SecurityContext;
@@ -18,6 +19,8 @@ public class UserController {
    @Inject
    MemberManager memberManager;
 
+   private Logger logger = Logger.getLogger(this.getClass().getName());
+
 
    @GetMapping("/")
    public String index() {
@@ -28,11 +31,11 @@ public class UserController {
    @GetMapping("/connect")
    public String user(Principal principal) {
       // Get authenticated user name from Principal
-      System.out.println("trying to get to user");
-      System.out.println(principal.getName());
-      System.out.println("role: "+principal.toString());
+      logger.info("trying to get to user");
+      logger.info(principal.getName());
+      logger.info("role: "+principal.toString());
 
-      System.out.println("principal: "+principal);
+      logger.info("principal: "+principal);
       return "index";
    }
 
@@ -40,14 +43,14 @@ public class UserController {
    public ModelAndView admin() {
       // Get authenticated user name from SecurityContext
       SecurityContext context = SecurityContextHolder.getContext();
-      System.out.println(context.getAuthentication().getName());
-      System.out.println(context.getAuthentication().getCredentials());
-      System.out.println(context.getAuthentication());
+      logger.info(context.getAuthentication().getName());
+      logger.info(context.getAuthentication().getCredentials().toString());
+      logger.info(context.getAuthentication().toString());
       Member m = memberManager.getMember(context);
       ModelAndView mv = new ModelAndView();
       mv.addObject(m);
       mv.setViewName("mySpace");
-      System.out.println("Token from member: "+m);
+      logger.info("Token from member: "+m);
       return mv;
    }
 }
