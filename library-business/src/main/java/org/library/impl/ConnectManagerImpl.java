@@ -7,6 +7,7 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
@@ -29,6 +30,7 @@ public class ConnectManagerImpl implements AuthenticationProvider {
     MemberManager memberManager;
 
     private String token;
+    private final String role = "USER";
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -49,14 +51,15 @@ public class ConnectManagerImpl implements AuthenticationProvider {
 
         }
         System.out.println("token found: "+token);
-        Collection<? extends GrantedAuthority> authorities = buildUserAuthority(memberManager.getMember(1));
+
 
         if (token!=null) {
-            Authentication auth = new UsernamePasswordAuthenticationToken(login,  token, authorities);
-
+            Authentication auth = new UsernamePasswordAuthenticationToken(login,  token, buildUserAuthority());
             System.out.println("trucko: "+auth.getAuthorities());
             System.out.println("cred: "+auth.getCredentials());
             System.out.println("login: "+auth.getName());
+            String token = "abc123";
+            ((UsernamePasswordAuthenticationToken) auth).setDetails(token);
             return auth;
         }  else {
             throw new
@@ -72,42 +75,16 @@ public class ConnectManagerImpl implements AuthenticationProvider {
         return auth.equals(UsernamePasswordAuthenticationToken.class);
     }
 
-   /* @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Member m = memberManager.getMember(1);
-        System.out.println("getting user details");
-        List<GrantedAuthority> authorities = buildUserAuthority(m);
-        return buildUserForAuthentication(m, authorities);
-    }*/
-
-
-    private User buildUser(){
-        Member m = memberManager.getMember(1);
-        Collection<GrantedAuthority> authorities = buildUserAuthority(m);
-        System.out.println("building user");
-        User user = new User(m.getLogin(), m.getToken(),authorities);
-        return user;
-    }
-
-    // Converts com.mkyong.users.model.User user to
-    // org.springframework.security.core.userdetails.User
-    private User buildUserForAuthentication(Member m,
-                                            List<GrantedAuthority> authorities) {
-        System.out.println("login: "+m.getLogin());
-        System.out.println("pwd: "+m.getPassword());
-        User user = new User(m.getLogin(), m.getPassword(), authorities);
-        System.out.println("auh: "+authorities.get(0));
-        return user;
-    }
 
 
 
-    private Collection<GrantedAuthority> buildUserAuthority(Member m) {
+
+    private Collection<GrantedAuthority> buildUserAuthority() {
 
         Set<GrantedAuthority> setAuths = new HashSet<GrantedAuthority>();
 
         // Build user's authorities
-        setAuths.add(new SimpleGrantedAuthority(m.getRole()));
+        setAuths.add(new SimpleGrantedAuthority(role));
 
         Collection<GrantedAuthority> result = new ArrayList<GrantedAuthority>(setAuths);
         System.out.println("result: "+((ArrayList<GrantedAuthority>) result).get(0));

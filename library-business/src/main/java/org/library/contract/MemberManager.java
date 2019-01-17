@@ -2,9 +2,10 @@ package org.library.contract;
 
 
 import org.library.model.Member;
+import org.springframework.security.core.context.SecurityContext;
 
 public interface MemberManager {
 
 
-    public Member getMember(int id);
+    public String getMember(SecurityContext context);
 }

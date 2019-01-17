@@ -3,6 +3,7 @@ package org.library.spring.controller;
 import java.security.Principal;
 
 import org.library.contract.BookManager;
+import org.library.contract.MemberManager;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -12,7 +13,8 @@ import javax.inject.Inject;
 
 @Controller
 public class UserController {
-
+   @Inject
+   MemberManager memberManager;
 
 
    @GetMapping("/")
@@ -37,6 +39,9 @@ public class UserController {
       // Get authenticated user name from SecurityContext
       SecurityContext context = SecurityContextHolder.getContext();
       System.out.println(context.getAuthentication().getName());
+      System.out.println(context.getAuthentication().getCredentials());
+      System.out.println(context.getAuthentication());
+      System.out.println("Token from member: "+memberManager.getMember(context));
       return "result";
    }
 }
