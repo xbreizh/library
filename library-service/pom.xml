@@ -146,7 +146,7 @@
                                 </wsdlOption>
                                 <wsdlOption>
                                     <wsdl>
-                                        https://raw.githubusercontent.com/xbreizh/troparo/62451bffc8fc20dbdb57f185a49406f9a141cfcf/troparo-web/src/main/resources/org/troparo/web/services/MemberService.wsdl
+                                        https://raw.githubusercontent.com/xbreizh/troparo/d73702bc1ee2dc4759f01da737f790a1e834a360/troparo-web/src/main/resources/org/troparo/web/services/MemberService.wsdl
                                     </wsdl>
                                 </wsdlOption>
                                 <wsdlOption>

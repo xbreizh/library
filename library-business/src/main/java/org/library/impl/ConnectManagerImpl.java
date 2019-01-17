@@ -53,12 +53,12 @@ public class ConnectManagerImpl implements AuthenticationProvider {
         System.out.println("token found: "+token);
 
 
-        if (token!=null) {
+        if (!token.equals("wrong login or pwd")) {
             Authentication auth = new UsernamePasswordAuthenticationToken(login,  token, buildUserAuthority());
             System.out.println("trucko: "+auth.getAuthorities());
             System.out.println("cred: "+auth.getCredentials());
             System.out.println("login: "+auth.getName());
-            String token = "abc123";
+
             ((UsernamePasswordAuthenticationToken) auth).setDetails(token);
             return auth;
         }  else {
