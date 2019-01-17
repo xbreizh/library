@@ -4,10 +4,12 @@ import java.security.Principal;
 
 import org.library.contract.BookManager;
 import org.library.contract.MemberManager;
+import org.library.model.Member;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
 
@@ -34,14 +36,18 @@ public class UserController {
       return "index";
    }
 
-   @GetMapping("/result")
-   public String admin() {
+   @GetMapping("/mySpace")
+   public ModelAndView admin() {
       // Get authenticated user name from SecurityContext
       SecurityContext context = SecurityContextHolder.getContext();
       System.out.println(context.getAuthentication().getName());
       System.out.println(context.getAuthentication().getCredentials());
       System.out.println(context.getAuthentication());
-      System.out.println("Token from member: "+memberManager.getMember(context));
-      return "result";
+      Member m = memberManager.getMember(context);
+      ModelAndView mv = new ModelAndView();
+      mv.addObject(m);
+      mv.setViewName("mySpace");
+      System.out.println("Token from member: "+m);
+      return mv;
    }
 }

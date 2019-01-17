@@ -2,10 +2,14 @@ package org.library.impl;
 
 
 import org.library.contract.MemberManager;
+import org.library.model.Loan;
 import org.library.model.Member;
 import org.springframework.security.core.context.SecurityContext;
+import org.troparo.entities.loan.*;
 import org.troparo.entities.member.*;
-import org.troparo.services.memberservice.BusinessException;
+import org.troparo.services.bookservice.BookService;
+import org.troparo.services.loanservice.BusinessException;
+import org.troparo.services.loanservice.LoanService;
 import org.troparo.services.memberservice.BusinessExceptionMember;
 import org.troparo.services.memberservice.MemberService;
 
@@ -13,8 +17,10 @@ import javax.inject.Named;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 @Named
 public class MemberManagerImpl implements MemberManager {
@@ -44,7 +50,7 @@ public class MemberManagerImpl implements MemberManager {
             // converting into Member
             member = convertMemberTypeOutIntoMember( memberTypeOut);
         }catch (NullPointerException e){
-            System.out.println("truc exception");
+            System.out.println("Issue while trying to get member details");
         } catch (BusinessExceptionMember businessExceptionMember) {
             businessExceptionMember.printStackTrace();
         }

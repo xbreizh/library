@@ -26,7 +26,7 @@
   </security:authorize>
   <security:authorize access="isAuthenticated()">
 
-    <a href="result">My results</a><br>
+    <a href="mySpace">My Space</a><br>
     <a href="logout">Logout</a>
   </security:authorize>
 </body>
