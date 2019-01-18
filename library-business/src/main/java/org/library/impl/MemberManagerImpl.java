@@ -1,6 +1,8 @@
 package org.library.impl;
 
 
+import org.library.contract.BookManager;
+import org.library.contract.LoanManager;
 import org.library.contract.MemberManager;
 import org.library.model.Loan;
 import org.library.model.Member;
@@ -13,6 +15,7 @@ import org.troparo.services.loanservice.LoanService;
 import org.troparo.services.memberservice.BusinessExceptionMember;
 import org.troparo.services.memberservice.MemberService;
 
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
@@ -31,6 +34,11 @@ public class MemberManagerImpl implements MemberManager {
     private String login="";
     private MemberTypeOut memberTypeOut;
     private Member member;
+
+    @Inject
+    LoanManager loanManager;
+    @Inject
+    BookManager bookManager;
 
 
     @Override
@@ -51,6 +59,18 @@ public class MemberManagerImpl implements MemberManager {
 
             // converting into Member
             member = convertMemberTypeOutIntoMember( memberTypeOut);
+            logger.info("trying to pass loan to member");
+            List<Loan> loanList = loanManager.getLoansbyMember(context);
+            member.setLoanList(loanList);
+            logger.info("member loan size: "+member.getLoanList().size());
+            /*// getting Loan list
+            try {
+                logger.info("trying to pass the loan list");
+
+            }catch (NullPointerException e){
+                logger.info("no loan so far for that user: "+member.getLogin());
+                member.setLoanList(new ArrayList<Loan>());
+            }*/
         }catch (NullPointerException e){
             logger.info("Issue while trying to get member details");
         } catch (BusinessExceptionMember businessExceptionMember) {

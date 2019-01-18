@@ -1,10 +1,12 @@
 package org.library.spring.controller;
 
 import java.security.Principal;
+import java.util.List;
 import java.util.logging.Logger;
 
 
 import org.library.contract.MemberManager;
+import org.library.model.Loan;
 import org.library.model.Member;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -44,13 +46,14 @@ public class UserController {
       // Get authenticated user name from SecurityContext
       SecurityContext context = SecurityContextHolder.getContext();
       logger.info(context.getAuthentication().getName());
-      logger.info(context.getAuthentication().getCredentials().toString());
-      logger.info(context.getAuthentication().toString());
+     /* logger.info(context.getAuthentication().getCredentials().toString());
+      logger.info(context.getAuthentication().toString());*/
       Member m = memberManager.getMember(context);
       ModelAndView mv = new ModelAndView();
       mv.addObject(m);
       mv.setViewName("mySpace");
       logger.info("Token from member: "+m);
+      logger.info("loan sample from member: "+m.getLoanList().get(0));
       return mv;
    }
 }
