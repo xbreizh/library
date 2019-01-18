@@ -53,7 +53,7 @@ public class UserController {
       mv.addObject(m);
       mv.setViewName("mySpace");
       logger.info("Token from member: "+m);
-      logger.info("loan sample from member: "+m.getLoanList().get(0));
+      /*logger.info("loan sample from member: "+m.getLoanList().get(0));*/
       return mv;
    }
 }

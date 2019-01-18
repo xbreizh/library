@@ -74,19 +74,19 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link BusinessConnectFaultType }
+     * 
+     */
+    public BusinessConnectFaultType createBusinessConnectFaultType() {
+        return new BusinessConnectFaultType();
+    }
+
+    /**
      * Create an instance of {@link GetTokenResponseType }
      * 
      */
     public GetTokenResponseType createGetTokenResponseType() {
         return new GetTokenResponseType();
-    }
-
-    /**
-     * Create an instance of {@link BusinessFaultType }
-     * 
-     */
-    public BusinessFaultType createBusinessFaultType() {
-        return new BusinessFaultType();
     }
 
     /**

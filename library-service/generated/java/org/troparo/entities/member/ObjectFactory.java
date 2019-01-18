@@ -50,6 +50,30 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link LoanListType }
+     * 
+     */
+    public LoanListType createLoanListType() {
+        return new LoanListType();
+    }
+
+    /**
+     * Create an instance of {@link LoanTypeOut }
+     * 
+     */
+    public LoanTypeOut createLoanTypeOut() {
+        return new LoanTypeOut();
+    }
+
+    /**
+     * Create an instance of {@link BookTypeOut }
+     * 
+     */
+    public BookTypeOut createBookTypeOut() {
+        return new BookTypeOut();
+    }
+
+    /**
      * Create an instance of {@link GetMemberByIdResponseType }
      * 
      */

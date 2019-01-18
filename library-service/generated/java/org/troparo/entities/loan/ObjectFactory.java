@@ -86,19 +86,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link BusinessFaultType }
-     * 
-     */
-    public BusinessFaultType createBusinessFaultType() {
-        return new BusinessFaultType();
-    }
-
-    /**
      * Create an instance of {@link LoanTypeOut }
      * 
      */
     public LoanTypeOut createLoanTypeOut() {
         return new LoanTypeOut();
+    }
+
+    /**
+     * Create an instance of {@link BusinessLoanFaultType }
+     * 
+     */
+    public BusinessLoanFaultType createBusinessLoanFaultType() {
+        return new BusinessLoanFaultType();
     }
 
     /**

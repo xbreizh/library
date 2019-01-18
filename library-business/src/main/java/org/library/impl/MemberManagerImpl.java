@@ -24,11 +24,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.logging.Logger;
+import org.apache.log4j.Logger;
 
 @Named
 public class MemberManagerImpl implements MemberManager {
-    private Logger logger = Logger.getLogger(this.getClass().getName());
+    private static final Logger logger = Logger.getLogger(MemberManagerImpl.class);
 
     private String token="";
     private String login="";
@@ -63,6 +63,7 @@ public class MemberManagerImpl implements MemberManager {
             List<Loan> loanList = loanManager.getLoansbyMember(context);
             member.setLoanList(loanList);
             logger.info("member loan size: "+member.getLoanList().size());
+            logger.info("loan list for that member: "+memberTypeOut.getLoanListType().getLoanTypeOut().get(0).getBookTypeOut().getTitle());
             /*// getting Loan list
             try {
                 logger.info("trying to pass the loan list");

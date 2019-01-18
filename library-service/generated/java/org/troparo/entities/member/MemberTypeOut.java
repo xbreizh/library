@@ -28,6 +28,7 @@ import javax.xml.datatype.XMLGregorianCalendar;
  *         &lt;element name="Email" type="{http://www.w3.org/2001/XMLSchema}string"/>
  *         &lt;element name="DateJoin" type="{http://www.w3.org/2001/XMLSchema}date"/>
  *         &lt;element name="Role" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element ref="{http://troparo.org/entities/member}LoanListType"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -45,7 +46,8 @@ import javax.xml.datatype.XMLGregorianCalendar;
     "password",
     "email",
     "dateJoin",
-    "role"
+    "role",
+    "loanListType"
 })
 @XmlRootElement(name = "MemberTypeOut")
 public class MemberTypeOut {
@@ -67,6 +69,8 @@ public class MemberTypeOut {
     protected XMLGregorianCalendar dateJoin;
     @XmlElement(name = "Role", required = true)
     protected String role;
+    @XmlElement(name = "LoanListType", required = true)
+    protected LoanListType loanListType;
 
     /**
      * Gets the value of the id property.
@@ -250,6 +254,30 @@ public class MemberTypeOut {
      */
     public void setRole(String value) {
         this.role = value;
+    }
+
+    /**
+     * Gets the value of the loanListType property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link LoanListType }
+     *     
+     */
+    public LoanListType getLoanListType() {
+        return loanListType;
+    }
+
+    /**
+     * Sets the value of the loanListType property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link LoanListType }
+     *     
+     */
+    public void setLoanListType(LoanListType value) {
+        this.loanListType = value;
     }
 
 }

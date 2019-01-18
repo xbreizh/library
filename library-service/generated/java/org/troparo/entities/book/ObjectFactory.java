@@ -98,11 +98,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link BusinessFaultType }
+     * Create an instance of {@link BusinessBookFaultType }
      * 
      */
-    public BusinessFaultType createBusinessFaultType() {
-        return new BusinessFaultType();
+    public BusinessBookFaultType createBusinessBookFaultType() {
+        return new BusinessBookFaultType();
     }
 
     /**

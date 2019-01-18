@@ -80,7 +80,11 @@
             <artifactId>jaxws-rt</artifactId>
             <version>2.3.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>${log4j.version}</version>
+        </dependency>
 
     </dependencies>
 
@@ -141,22 +145,22 @@
                             <wsdlOptions>
                                 <wsdlOption>
                                     <wsdl>
-                                        https://raw.githubusercontent.com/xbreizh/troparo/07acd61d5e4e936cebf90ca1243304d5c6fbe9a6/troparo-web/src/main/resources/org/troparo/web/services/BookService.wsdl
+                                        https://raw.githubusercontent.com/xbreizh/troparo/a4bee3c133cab83fb1727de7426039fb7326c11e/troparo-web/src/main/resources/org/troparo/web/services/MemberService.wsdl
                                     </wsdl>
                                 </wsdlOption>
                                 <wsdlOption>
                                     <wsdl>
-                                        https://raw.githubusercontent.com/xbreizh/troparo/d73702bc1ee2dc4759f01da737f790a1e834a360/troparo-web/src/main/resources/org/troparo/web/services/MemberService.wsdl
+                                        https://raw.githubusercontent.com/xbreizh/troparo/a4bee3c133cab83fb1727de7426039fb7326c11e/troparo-web/src/main/resources/org/troparo/web/services/LoanService.wsdl
                                     </wsdl>
                                 </wsdlOption>
                                 <wsdlOption>
                                     <wsdl>
-                                        https://raw.githubusercontent.com/xbreizh/troparo/07acd61d5e4e936cebf90ca1243304d5c6fbe9a6/troparo-web/src/main/resources/org/troparo/web/services/LoanService.wsdl
+                                        https://raw.githubusercontent.com/xbreizh/troparo/a4bee3c133cab83fb1727de7426039fb7326c11e/troparo-web/src/main/resources/org/troparo/web/services/ConnectService.wsdl
                                     </wsdl>
                                 </wsdlOption>
                                 <wsdlOption>
                                     <wsdl>
-                                        https://raw.githubusercontent.com/xbreizh/troparo/07acd61d5e4e936cebf90ca1243304d5c6fbe9a6/troparo-web/src/main/resources/org/troparo/web/services/ConnectService.wsdl
+                                        https://raw.githubusercontent.com/xbreizh/troparo/a4bee3c133cab83fb1727de7426039fb7326c11e/troparo-web/src/main/resources/org/troparo/web/services/BookService.wsdl
                                     </wsdl>
                                 </wsdlOption>
                             </wsdlOptions>
