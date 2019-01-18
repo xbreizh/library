@@ -1,6 +1,7 @@
 package org.library.impl;
 
 import org.library.contract.BookManager;
+import org.library.model.Book;
 
 import javax.inject.Named;
 import java.util.logging.Logger;
@@ -9,10 +10,9 @@ import java.util.logging.Logger;
 public class BookManagerImpl implements BookManager {
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
+
     @Override
-    public void trok() {
-        logger.info("topoko");
+    public Book getBook(int id) {
+        return null;
     }
-
-
 }

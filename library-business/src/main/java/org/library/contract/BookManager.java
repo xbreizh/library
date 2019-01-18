@@ -1,9 +1,11 @@
 package org.library.contract;
 
 
+import org.library.model.Book;
+
+import java.util.List;
+
 public interface BookManager {
 
-   /* public List<Book> getBooks(String token);*/
-
-    public void trok();
+   public Book getBook(int id);
 }

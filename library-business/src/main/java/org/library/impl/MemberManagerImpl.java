@@ -35,8 +35,8 @@ public class MemberManagerImpl implements MemberManager {
 
     @Override
     public Member getMember(SecurityContext context) {
-            token = context.getAuthentication().getDetails().toString();
-            login = context.getAuthentication().getPrincipal().toString();
+        token = context.getAuthentication().getDetails().toString();
+        login = context.getAuthentication().getPrincipal().toString();
         logger.info("token: "+token);
         logger.info("login: "+login);
         try {
@@ -65,14 +65,8 @@ public class MemberManagerImpl implements MemberManager {
         member.setLastName(memberTypeOut.getLastName());
         member.setLogin(memberTypeOut.getLogin());
         member.setEmail(memberTypeOut.getEmail());
-        GregorianCalendar cal = memberTypeOut.getDateJoin().toGregorianCalendar();
-        XMLGregorianCalendar xmlCalendar = null;
-        try {
-            xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(cal);
-        } catch (DatatypeConfigurationException e) {
-            e.printStackTrace();
-        }
-        Date date = xmlCalendar.toGregorianCalendar().getTime();
+        // converting xml date into Date
+        Date date = convertGregorianCalendarIntoDate(memberTypeOut.getDateJoin().toGregorianCalendar());
         member.setDateJoin(date);
         member.setRole(memberTypeOut.getRole());
 
@@ -80,5 +74,16 @@ public class MemberManagerImpl implements MemberManager {
         return member;
     }
 
+    protected Date convertGregorianCalendarIntoDate(GregorianCalendar gDate){
+        XMLGregorianCalendar xmlCalendar = null;
+        try {
+            xmlCalendar = DatatypeFactory.newInstance().newXMLGregorianCalendar(gDate);
+        } catch (DatatypeConfigurationException e) {
+            e.printStackTrace();
+        }
+        Date date = xmlCalendar.toGregorianCalendar().getTime();
+        return date;
+
+    }
 
 }
