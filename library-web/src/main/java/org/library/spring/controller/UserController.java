@@ -1,6 +1,8 @@
 package org.library.spring.controller;
 
+import org.library.contract.BookManager;
 import org.library.contract.MemberManager;
+import org.library.model.Book;
 import org.library.model.Loan;
 import org.library.model.Member;
 import org.springframework.security.core.context.SecurityContext;
@@ -12,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.inject.Inject;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -19,6 +22,8 @@ import java.util.logging.Logger;
 public class UserController {
     @Inject
     MemberManager memberManager;
+    @Inject
+    BookManager bookManager;
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
 
@@ -69,11 +74,19 @@ public class UserController {
 
     @GetMapping("/search")
     public ModelAndView search() {
+        List<Book> books = new ArrayList<>();
         // Get authenticated user name from SecurityContext
         SecurityContext context = SecurityContextHolder.getContext();
+        String token = context.getAuthentication().getDetails().toString();
+        logger.info("token: "+token);
         logger.info(context.getAuthentication().getName());
-
+        HashMap criterias = new HashMap<String, String>();
+        criterias.put("ISBN", "12345678OK");
+        criterias.put("TITLE", "");
+        criterias.put("AUTHOR", "");
+        books = bookManager.searchBooks(token, criterias);
         ModelAndView mv = new ModelAndView();
+        mv.addObject("books", books);
         mv.setViewName("search");
         logger.info("going to search");
         /*logger.info("loan sample from member: "+m.getLoanList().get(0));*/

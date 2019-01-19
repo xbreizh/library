@@ -4,13 +4,15 @@ import org.apache.log4j.Logger;
 import org.library.contract.BookManager;
 import org.library.model.Book;
 import org.springframework.security.core.context.SecurityContext;
-import org.troparo.entities.book.BookTypeOut;
-import org.troparo.entities.book.GetBookByIdRequestType;
-import org.troparo.entities.book.GetBookByIdResponseType;
+import org.troparo.entities.book.*;
 import org.troparo.services.bookservice.BookService;
 import org.troparo.services.bookservice.BusinessExceptionBook;
 
 import javax.inject.Named;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 
 @Named
 public class BookManagerImpl implements BookManager {
@@ -21,32 +23,67 @@ public class BookManagerImpl implements BookManager {
 
 
     @Override
-    public Book getBook(SecurityContext context, int id) {
-        String token = context.getAuthentication().getDetails().toString();
-        String login = context.getAuthentication().getPrincipal().toString();
-        logger.info("token: " + token);
-        logger.info("login: " + login);
-        Book book = null;
-
+    public List<Book> searchBooks(String token, HashMap criterias) {
+        List<Book> result = new ArrayList<>();
+        BookService bookService = new BookService();
+        GetBookByCriteriasRequestType requestType = new GetBookByCriteriasRequestType();
+        requestType.setToken(token);
+        requestType.setBookCriterias(convertCriteriasIntoCriteriasRequest(criterias));
+        GetBookByCriteriasResponseType responseType = new GetBookByCriteriasResponseType();
         try {
-            BookService bookService = new BookService();
-            GetBookByIdRequestType requestType = new GetBookByIdRequestType();
-            requestType.setToken(token);
-            requestType.setReturn(id);
-            logger.info("request prepared");
-            GetBookByIdResponseType responseType = bookService.getBookServicePort().getBookById(requestType);
-            BookTypeOut bookTypeOut = responseType.getBookTypeOut();
-            logger.info("title: " + bookTypeOut.getTitle());
-            if (responseType.getBookTypeOut() != null) {
-                book = convertBookTypeOutIntoBook(bookTypeOut);
-            }
-        } catch (BusinessExceptionBook e) {
-            logger.error(e.getMessage());
+            logger.info(requestType.getBookCriterias().getAuthor());
+            logger.info(requestType.getToken());
+            responseType = bookService.getBookServicePort().getBookByCriterias(requestType);
+        } catch (BusinessExceptionBook businessExceptionBook) {
+            logger.error("error trying to get the result");
+            logger.error(businessExceptionBook.getMessage());
         }
-        return book;
+
+        logger.info("result: "+responseType.getBookListType().getBookTypeOut().size());
+        result = convertBookTypeOutListIntoBookList(responseType.getBookListType().getBookTypeOut());
+        logger.info("result: "+result);
+        return result;
     }
-    @Override
-    public Book convertBookTypeOutIntoBook(BookTypeOut bookTypeOut) {
+
+    private List<Book> convertBookTypeOutListIntoBookList(List<BookTypeOut> bookTypeOutList) {
+        List<Book> bookList = new ArrayList<>();
+        for (BookTypeOut bookTypeOut: bookTypeOutList
+             ) {
+            Book book = new Book();
+            book.setId(bookTypeOut.getId());
+            book.setIsbn(bookTypeOut.getISBN());
+            book.setTitle(bookTypeOut.getTitle());
+            book.setAuthor(bookTypeOut.getAuthor());
+            book.setEdition(bookTypeOut.getEdition());
+            book.setPublicationYear(bookTypeOut.getPublicationYear());
+            book.setNbPages(bookTypeOut.getNbPages());
+            book.setKeywords(bookTypeOut.getKeywords());
+            bookList.add(book);
+        }
+        return bookList;
+    }
+
+    private BookCriterias convertCriteriasIntoCriteriasRequest(HashMap<String, String> criterias) {
+        BookCriterias bookCriterias = new BookCriterias();
+            bookCriterias.setISBN(criterias.get("ISBN"));
+            logger.info("added isbn: ");
+
+            bookCriterias.setTitle(criterias.get("TITLE"));
+            logger.info("added title: ");
+
+            bookCriterias.setAuthor(criterias.get("AUTHOR"));
+            logger.info("added author: ");
+
+
+        logger.info("author passed: "+bookCriterias.getAuthor());
+        logger.info("title passed: "+bookCriterias.getTitle());
+        logger.info("isbn passed: "+bookCriterias.getISBN());
+        
+        return bookCriterias;
+    }
+
+
+    private Book convertBookTypeOutIntoBook(BookTypeOut bookTypeOut) {
         logger.info("trying to convert book");
         Book book = new Book();
         book.setId(bookTypeOut.getId());

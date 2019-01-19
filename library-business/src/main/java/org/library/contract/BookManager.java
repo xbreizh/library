@@ -5,8 +5,12 @@ import org.library.model.Book;
 import org.springframework.security.core.context.SecurityContext;
 import org.troparo.entities.book.BookTypeOut;
 
+import java.util.HashMap;
+import java.util.List;
+
 public interface BookManager {
 
-    Book getBook(SecurityContext context, int id);
-    Book convertBookTypeOutIntoBook(BookTypeOut bookTypeOut);
+
+
+    List<Book> searchBooks(String token, HashMap criterias);
 }

@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface LoanManager {
 
-    List<Loan> getLoansbyMember(SecurityContext context);
+
 
     boolean renewLoan(Loan loan);
 
