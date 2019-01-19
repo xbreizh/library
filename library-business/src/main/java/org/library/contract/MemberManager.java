@@ -7,5 +7,5 @@ import org.springframework.security.core.context.SecurityContext;
 public interface MemberManager {
 
 
-    public Member getMember(SecurityContext context);
+    public Member getMember(String token, String login);
 }

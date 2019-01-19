@@ -3,10 +3,10 @@ package org.library.contract;
 
 import org.library.model.Book;
 import org.springframework.security.core.context.SecurityContext;
-
-import java.util.List;
+import org.troparo.entities.book.BookTypeOut;
 
 public interface BookManager {
 
-   public Book getBook(SecurityContext context, int id);
+    Book getBook(SecurityContext context, int id);
+    Book convertBookTypeOutIntoBook(BookTypeOut bookTypeOut);
 }

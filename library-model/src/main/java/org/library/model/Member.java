@@ -146,7 +146,7 @@ public class Member {
                 ", email='" + email + '\'' +
                 ", dateJoin=" + dateJoin +
                 ", dateConnect=" + dateConnect +
-                ", loanList=" + loanList.size() +
+                ", loanList=" + loanList +
                 '}';
     }
 }

@@ -1,29 +1,25 @@
 package org.library.impl;
 
+import org.apache.log4j.Logger;
 import org.library.contract.MemberManager;
-import org.library.model.Member;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.CredentialsContainer;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.troparo.entities.connect.GetTokenRequestType;
 import org.troparo.entities.connect.GetTokenResponseType;
-import org.troparo.services.connectservice.BusinessException;
 import org.troparo.services.connectservice.BusinessExceptionConnect;
 import org.troparo.services.connectservice.ConnectService;
 
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.*;
-import org.apache.log4j.Logger;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Named
 public class ConnectManagerImpl implements AuthenticationProvider {
@@ -32,7 +28,7 @@ public class ConnectManagerImpl implements AuthenticationProvider {
     MemberManager memberManager;
     private static final Logger logger = Logger.getLogger(ConnectManagerImpl.class);
     private String token;
-    private final static  String role = "USER";
+    private final static String role = "USER";
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -47,7 +43,7 @@ public class ConnectManagerImpl implements AuthenticationProvider {
         try {
             GetTokenResponseType responseType = cs.getConnectServicePort().getToken(t);
             token = responseType.getReturn();
-        }  catch (BusinessExceptionConnect businessExceptionConnect) {
+        } catch (BusinessExceptionConnect businessExceptionConnect) {
             logger.error("issue while trying to get the token");
         }
         logger.info("token found: " + token);

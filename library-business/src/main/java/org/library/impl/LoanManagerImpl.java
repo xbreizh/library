@@ -1,14 +1,16 @@
 package org.library.impl;
 
-import org.library.model.Book;
-import org.springframework.remoting.soap.SoapFaultException;
-import org.springframework.security.core.context.SecurityContext;
+import org.apache.log4j.Logger;
 import org.library.contract.BookManager;
 import org.library.contract.LoanManager;
+import org.library.model.Book;
 import org.library.model.Loan;
 import org.library.model.Member;
-import org.troparo.entities.loan.*;
-import org.troparo.services.loanservice.BusinessException;
+import org.springframework.security.core.context.SecurityContext;
+import org.troparo.entities.loan.GetLoanByCriteriasRequestType;
+import org.troparo.entities.loan.GetLoanByCriteriasResponseType;
+import org.troparo.entities.loan.LoanCriterias;
+import org.troparo.entities.loan.LoanTypeOut;
 import org.troparo.services.loanservice.BusinessExceptionLoan;
 import org.troparo.services.loanservice.LoanService;
 
@@ -22,7 +24,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
-import org.apache.log4j.Logger;
 
 @Named
 public class LoanManagerImpl implements LoanManager {

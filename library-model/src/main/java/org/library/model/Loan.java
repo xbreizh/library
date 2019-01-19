@@ -86,7 +86,6 @@ public class Loan {
                 ", startDate=" + startDate +
                 ", plannedEndDate=" + plannedEndDate +
                 ", endDate=" + endDate +
-                ", borrower=" + borrower.getLogin() +
                 ", book=" + book.getTitle() +
                 '}';
     }

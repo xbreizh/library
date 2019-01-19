@@ -1,13 +1,12 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="UTF-8" %>
 <!DOCTYPE html >
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>BORAJI.COM</title>
+    <title>SEARCH</title>
 </head>
 <body>
-<h2>User Page</h2>
+<h2>SEARCH Page</h2>
 <hr/>
 <h3>User dashboard </h3>
 <security:authorize access="isAuthenticated()">
