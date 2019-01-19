@@ -29,9 +29,15 @@ public class UserController {
 
 
     @GetMapping("/")
-    public String index() {
+    public String home() {
 
-        return "index";
+        return "home";
+    }
+
+    @GetMapping("/login")
+    public String login() {
+
+        return "login";
     }
 
     @GetMapping("/connect")
@@ -42,7 +48,7 @@ public class UserController {
         logger.info("role: " + principal.toString());
 
         logger.info("principal: " + principal);
-        return "index";
+        return "home";
     }
 
     @GetMapping("/mySpace")
