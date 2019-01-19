@@ -33,6 +33,8 @@ public class Book {
 
     private int nbPages;
 
+    private int nbAvailable;
+
 
     private String keywords;
 
@@ -47,6 +49,14 @@ public class Book {
 
     public void setId(int id) {
         Id = id;
+    }
+
+    public int getNbAvailable() {
+        return nbAvailable;
+    }
+
+    public void setNbAvailable(int nbAvailable) {
+        this.nbAvailable = nbAvailable;
     }
 
     public String getIsbn() {
@@ -133,6 +143,7 @@ public class Book {
                 ", edition='" + edition + '\'' +
                 ", nbPages=" + nbPages +
                 ", keywords='" + keywords + '\'' +
+                ", nbAvailable='" + nbAvailable + '\'' +
                 ", loanList=" + loanList.size() +
                 '}';
     }

@@ -40,12 +40,12 @@ public class BookManagerImpl implements BookManager {
         }
 
         logger.info("result: "+responseType.getBookListType().getBookTypeOut().size());
-        result = convertBookTypeOutListIntoBookList(responseType.getBookListType().getBookTypeOut());
+        result = convertBookTypeOutListIntoBookList(token, responseType.getBookListType().getBookTypeOut());
         logger.info("result: "+result);
         return result;
     }
 
-    private List<Book> convertBookTypeOutListIntoBookList(List<BookTypeOut> bookTypeOutList) {
+    private List<Book> convertBookTypeOutListIntoBookList(String token, List<BookTypeOut> bookTypeOutList) {
         List<Book> bookList = new ArrayList<>();
         for (BookTypeOut bookTypeOut: bookTypeOutList
              ) {
@@ -58,9 +58,28 @@ public class BookManagerImpl implements BookManager {
             book.setPublicationYear(bookTypeOut.getPublicationYear());
             book.setNbPages(bookTypeOut.getNbPages());
             book.setKeywords(bookTypeOut.getKeywords());
+            book.setNbAvailable(settingNbAvailable(token, book.getIsbn()));
             bookList.add(book);
         }
         return bookList;
+    }
+
+    private int settingNbAvailable(String token, String isbn) {
+        int available = 0;
+        BookService bookService = new BookService();
+        GetAvailableRequestType requestType = new GetAvailableRequestType();
+        requestType.setISBN(isbn.toUpperCase());
+        requestType.setToken(token);
+        try {
+            GetAvailableResponseType responseType = new GetAvailableResponseType();
+            responseType = bookService.getBookServicePort().getAvailable(requestType);
+            logger.info("getting: "+responseType.getReturn());
+            available = responseType.getReturn();
+        } catch (BusinessExceptionBook businessExceptionBook) {
+            logger.error(businessExceptionBook.getMessage());
+        }
+
+        return available;
     }
 
     private BookCriterias convertCriteriasIntoCriteriasRequest(HashMap<String, String> criterias) {
@@ -97,4 +116,5 @@ public class BookManagerImpl implements BookManager {
         logger.info("book converted: "+book);
         return book;
     }
+
 }
