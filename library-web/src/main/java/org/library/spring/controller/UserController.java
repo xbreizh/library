@@ -1,5 +1,6 @@
 package org.library.spring.controller;
 
+import org.apache.log4j.Logger;
 import org.library.contract.BookManager;
 import org.library.contract.MemberManager;
 import org.library.model.Book;
@@ -16,7 +17,6 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.logging.Logger;
 
 @Controller
 public class UserController {
@@ -25,8 +25,7 @@ public class UserController {
     @Inject
     BookManager bookManager;
 
-    private Logger logger = Logger.getLogger(this.getClass().getName());
-
+    private Logger logger = Logger.getLogger(UserController.class);
 
     @GetMapping("/")
     public String home() {
@@ -35,9 +34,12 @@ public class UserController {
     }
 
     @GetMapping("/login")
-    public String login() {
+    public ModelAndView login() {
+        logger.info("yuhuhuhuhu");
+        ModelAndView mv = new ModelAndView();
 
-        return "login";
+        mv.setViewName("login");
+        return mv;
     }
 
     @GetMapping("/connect")
