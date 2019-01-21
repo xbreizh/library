@@ -10,6 +10,7 @@ import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.inject.Inject;
@@ -102,8 +103,9 @@ public class UserController {
         return mv;
     }
 
-    @GetMapping("/search")
-    public ModelAndView search() {
+    @PostMapping("/search")
+    public ModelAndView search(ModelAndView mv) {
+        logger.info("getting into search");
         List<Book> books = new ArrayList<>();
         // Get authenticated user name from SecurityContext
         SecurityContext context = SecurityContextHolder.getContext();
@@ -115,10 +117,10 @@ public class UserController {
         criterias.put("TITLE", "");
         criterias.put("AUTHOR", "");
         books = bookManager.searchBooks(token, criterias);
-        ModelAndView mv = new ModelAndView();
+        /* ModelAndView mv = new ModelAndView();*/
         mv.addObject("books", books);
-        mv.setViewName("search");
-        logger.info("going to search");
+        mv.setViewName("home");
+        logger.info("going back to home");
         /*logger.info("loan sample from member: "+m.getLoanList().get(0));*/
         return mv;
     }

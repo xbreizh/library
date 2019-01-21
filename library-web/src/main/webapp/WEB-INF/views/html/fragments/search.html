@@ -1,0 +1,42 @@
+<div th:fragment="search" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    <form method="post" th:action="@{/search}">
+        <div class="form-group">
+            <input autofocus="autofocus"
+                   class="form-control"
+                   id="ISBN"
+                   name="ISBN"
+                   placeholder="ISBN"
+                   type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control"
+                   id="Title"
+                   name="title"
+                   placeholder="Title"
+                   type="text">
+        </div>
+        <div class="form-group">
+            <input class="form-control"
+                   id="Author"
+                   name="author"
+                   placeholder="Author"
+                   type="text">
+        </div>
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-6 col-sm-offset-3">
+                    <input class="form-control btn btn-info"
+                           id="login-submit"
+                           name="login-submit"
+                           type="submit"
+                           value="Log In">
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <br><br>
+
+    <td data-th-text="${books}"/>
+</div>
