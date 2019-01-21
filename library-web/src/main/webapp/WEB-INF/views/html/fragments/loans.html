@@ -11,6 +11,7 @@
             <th>Return Due On</th>
             <th>ISBN</th>
             <th>Title</th>
+            <th></th>
         </tr>
         </thead>
 
@@ -19,37 +20,16 @@
         <th:block data-th-each="loan : ${member.loanList}">
             <tr>
                 <td data-th-text="${loan.id}"/>
-                <td data-th-text="${loan.startDate}"/>
-                <td data-th-text="${loan.plannedEndDate}"/>
+                <td data-th-text="${#dates.format(loan.startDate, 'dd-MM-yyyy')}"/>
+                <td data-th-text="${#dates.format(loan.plannedEndDate, 'dd-MM-yyyy')}"/>
                 <td data-th-text="${loan.book.isbn}"/>
                 <td data-th-text="${loan.book.title}"/>
+                <td>view Details</td>
             </tr>
             <tr>
                 <td colspan="5">
-                    <table class="table table-striped">
-                        <thead>
-                        <tr>
-                            <th>ISBN</th>
-                            <th>Title</th>
-                            <th>Author</th>
-                            <th>Publication</th>
-                            <th>Edition</th>
-                            <th>Number Pages</th>
-                        </tr>
-                        </thead>
-                        <tbody>
+                    <div th:replace="fragments/book_details :: book_details"></div>
 
-                        <tr>
-                            <td data-th-text="${loan.book.isbn}"/>
-                            <td data-th-text="${loan.book.title}"/>
-                            <td data-th-text="${loan.book.author}"/>
-                            <td data-th-text="${loan.book.publicationYear}"/>
-                            <td data-th-text="${loan.book.edition}"/>
-                            <td data-th-text="${loan.book.nbPages}"/>
-                        </tr>
-
-                        </tbody>
-                    </table>
                 </td>
             </tr>
         </th:block>
