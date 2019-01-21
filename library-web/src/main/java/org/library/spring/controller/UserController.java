@@ -37,15 +37,17 @@ public class UserController {
       logger.info(context.getAuthentication().toString());*/
         Member m = memberManager.getMember(token, login);
         logger.info("Member retrieved: " + m);
+        logger.info("loan list: " + m.getLoanList());
         /* logger.info("Member retrieved: " + m.getLoanList().size());*/
         ModelAndView mv = new ModelAndView();
-        List<Loan> loanList = new ArrayList<>();
-
+        List<Loan> loanList = m.getLoanList();
+/*
         logger.info("loanlist: " + loanList);
         if (loanList.size() > 0) {
             logger.info("loanList > 0");
             loanList = m.getLoanList();
-        }
+        }*/
+        logger.info("loanList size: " + loanList.size());
         mv.addObject("loanList", loanList);
         mv.addObject("member", m);
         mv.setViewName("home");
@@ -74,26 +76,27 @@ public class UserController {
 
     @GetMapping("/mySpace")
     public ModelAndView mySpace() {
+        ModelAndView mv = new ModelAndView();
         // Get authenticated user name from SecurityContext
-        SecurityContext context = SecurityContextHolder.getContext();
+       /* SecurityContext context = SecurityContextHolder.getContext();
         String token = context.getAuthentication().getDetails().toString();
         String login = context.getAuthentication().getPrincipal().toString();
         logger.info("controller: "+context.getAuthentication().getName());
-     /* logger.info(context.getAuthentication().getCredentials().toString());
-      logger.info(context.getAuthentication().toString());*/
+     *//* logger.info(context.getAuthentication().getCredentials().toString());
+      logger.info(context.getAuthentication().toString());*//*
         Member m = memberManager.getMember(token, login);
         logger.info("Member retrieved: " + m);
-       /* logger.info("Member retrieved: " + m.getLoanList().size());*/
-        ModelAndView mv = new ModelAndView();
+       *//* logger.info("Member retrieved: " + m.getLoanList().size());*//*
+
         List<Loan> loanList = new ArrayList<>();
 
         logger.info("loanlist: "+loanList);
         if(loanList.size() > 0) {
             logger.info("loanList > 0");
             loanList =  m.getLoanList();
-        }
-        mv.addObject("loanList", loanList);
-        mv.addObject("member",m);
+        }*/
+      /*  mv.addObject("loanList", loanList);
+        mv.addObject("member",m);*/
         mv.setViewName("mySpace");
         /*logger.info("loan sample from member: "+m.getLoanList().get(0));*/
         return mv;
