@@ -2,15 +2,25 @@
 <html layout:decorate="~{fragments/layout}"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       xmlns:th="http://www.thymeleaf.org">
-<head>
-    <title>Secured</title>
-</head>
+
+<div th:replace="fragments/header :: head1"></div>
 <body>
+<div class="container">
 <div layout:fragment="content" th:remove="tag">
     <h1>My Space</h1>
     <form method="post" th:action="@{/logout}">
         <input type="submit" value="Sign Out"/>
     </form>
 </div>
+    <br><br><br>
+
+
+    <div th:replace="fragments/table_profile :: profile"></div>
+
+
+</div>
+
 </body>
+<div th:replace="fragments/header :: foot"></div>
+
 </html>

@@ -28,9 +28,28 @@ public class UserController {
     private Logger logger = Logger.getLogger(UserController.class);
 
     @GetMapping("/")
-    public String home() {
+    public ModelAndView home() {
+        SecurityContext context = SecurityContextHolder.getContext();
+        String token = context.getAuthentication().getDetails().toString();
+        String login = context.getAuthentication().getPrincipal().toString();
+        logger.info("controller: " + context.getAuthentication().getName());
+     /* logger.info(context.getAuthentication().getCredentials().toString());
+      logger.info(context.getAuthentication().toString());*/
+        Member m = memberManager.getMember(token, login);
+        logger.info("Member retrieved: " + m);
+        /* logger.info("Member retrieved: " + m.getLoanList().size());*/
+        ModelAndView mv = new ModelAndView();
+        List<Loan> loanList = new ArrayList<>();
 
-        return "home";
+        logger.info("loanlist: " + loanList);
+        if (loanList.size() > 0) {
+            logger.info("loanList > 0");
+            loanList = m.getLoanList();
+        }
+        mv.addObject("loanList", loanList);
+        mv.addObject("member", m);
+        mv.setViewName("home");
+        return mv;
     }
 
     @GetMapping("/login")
