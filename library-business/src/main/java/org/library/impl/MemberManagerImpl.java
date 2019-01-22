@@ -94,21 +94,23 @@ public class MemberManagerImpl implements MemberManager {
         logger.info("trying to convert LoanListType into List<Loan>");
         for (LoanTypeOut loanTypeOut : loanListType.getLoanTypeOut()
         ) {
-            Loan loan = new Loan();
-            loan.setId(loanTypeOut.getId());
-            Date date = convertGregorianCalendarIntoDate(loanTypeOut.getStartDate().toGregorianCalendar());
-            loan.setStartDate(date);
-            date = convertGregorianCalendarIntoDate(loanTypeOut.getPlannedEndDate().toGregorianCalendar());
-            loan.setPlannedEndDate(date);
-            if (loanTypeOut.getEndDate() != null) {
-                date = convertGregorianCalendarIntoDate(loanTypeOut.getEndDate().toGregorianCalendar());
-                loan.setEndDate(date);
-            }
-            loan.setRenewable(loanManager.isRenewable(token, loan.getId()));
+            if (loanTypeOut.getEndDate() == null) {
+                Loan loan = new Loan();
+                loan.setId(loanTypeOut.getId());
+                Date date = convertGregorianCalendarIntoDate(loanTypeOut.getStartDate().toGregorianCalendar());
+                loan.setStartDate(date);
+                date = convertGregorianCalendarIntoDate(loanTypeOut.getPlannedEndDate().toGregorianCalendar());
+                loan.setPlannedEndDate(date);
+                if (loanTypeOut.getEndDate() != null) {
+                    date = convertGregorianCalendarIntoDate(loanTypeOut.getEndDate().toGregorianCalendar());
+                    loan.setEndDate(date);
+                }
+                loan.setRenewable(loanManager.isRenewable(token, loan.getId()));
 
-            loan.setBook(convertBookTypeOutIntoBook(loanTypeOut.getBookTypeOut()));
-            loanList.add(loan);
-            logger.info("book added to list: "+loan.getBook().getTitle());
+                loan.setBook(convertBookTypeOutIntoBook(loanTypeOut.getBookTypeOut()));
+                loanList.add(loan);
+                logger.info("book added to list: " + loan.getBook().getTitle());
+            }
         }
 
         logger.info("loan list size: "+loanList.size());
