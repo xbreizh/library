@@ -4,8 +4,8 @@ import org.apache.log4j.Logger;
 import org.library.contract.BookManager;
 import org.library.contract.MemberManager;
 import org.library.model.Book;
-import org.library.model.Loan;
 import org.library.model.Member;
+import org.library.model.Search;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -41,15 +41,15 @@ public class UserController {
         logger.info("loan list: " + m.getLoanList());
         /* logger.info("Member retrieved: " + m.getLoanList().size());*/
         ModelAndView mv = new ModelAndView();
-        List<Loan> loanList = m.getLoanList();
+        /* List<Loan> loanList = m.getLoanList();*/
 /*
         logger.info("loanlist: " + loanList);
         if (loanList.size() > 0) {
             logger.info("loanList > 0");
             loanList = m.getLoanList();
         }*/
-        logger.info("loanList size: " + loanList.size());
-        mv.addObject("loanList", loanList);
+        Search search = new Search();
+        mv.addObject("loanList", m.getLoanList());
         mv.addObject("member", m);
         mv.setViewName("home");
         return mv;
@@ -104,20 +104,29 @@ public class UserController {
     }
 
     @PostMapping("/search")
-    public ModelAndView search(ModelAndView mv) {
+    public ModelAndView search(ModelAndView mv, String ISBN, String author, String title) {
         logger.info("getting into search");
         List<Book> books = new ArrayList<>();
+        /*Search search = new Search();*/
         // Get authenticated user name from SecurityContext
         SecurityContext context = SecurityContextHolder.getContext();
         String token = context.getAuthentication().getDetails().toString();
+        String login = context.getAuthentication().getPrincipal().toString();
+        Member m = memberManager.getMember(token, login);
         logger.info("token: "+token);
         logger.info(context.getAuthentication().getName());
+        logger.info("isbn received: " + ISBN);
+        logger.info("title received: " + title);
+        logger.info("author received: " + author);
+        /* logger.info("search: "+search);*/
         HashMap criterias = new HashMap<String, String>();
-        criterias.put("ISBN", "12345678OK");
-        criterias.put("TITLE", "");
-        criterias.put("AUTHOR", "");
+        criterias.put("ISBN", ISBN);
+        criterias.put("TITLE", title);
+        criterias.put("AUTHOR", author);
         books = bookManager.searchBooks(token, criterias);
         /* ModelAndView mv = new ModelAndView();*/
+        mv.addObject("loanList", m.getLoanList());
+        mv.addObject("member", m);
         mv.addObject("books", books);
         mv.setViewName("home");
         logger.info("going back to home");

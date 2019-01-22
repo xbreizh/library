@@ -1,11 +1,12 @@
 <div th:fragment="search" xmlns:th="http://www.w3.org/1999/xhtml">
 
-    <form method="post" th:action="@{/search}">
+    <form method="post" th:action="@{/search}" th:object="${search}">
         <div class="form-group">
             <input autofocus="autofocus"
                    class="form-control"
                    id="ISBN"
                    name="ISBN"
+                   default=""
                    placeholder="ISBN"
                    type="text">
         </div>
@@ -13,6 +14,7 @@
             <input class="form-control"
                    id="Title"
                    name="title"
+                   default=""
                    placeholder="Title"
                    type="text">
         </div>
@@ -20,6 +22,7 @@
             <input class="form-control"
                    id="Author"
                    name="author"
+                   default=""
                    placeholder="Author"
                    type="text">
         </div>
