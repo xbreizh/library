@@ -4,6 +4,8 @@ import org.apache.log4j.Logger;
 import org.library.contract.BookManager;
 import org.library.contract.LoanManager;
 import org.library.model.Loan;
+import org.troparo.entities.loan.GetLoanStatusRequestType;
+import org.troparo.entities.loan.GetLoanStatusResponseType;
 import org.troparo.entities.loan.IsRenewableRequestType;
 import org.troparo.entities.loan.IsRenewableResponseType;
 import org.troparo.services.loanservice.BusinessExceptionLoan;
@@ -48,6 +50,23 @@ public class LoanManagerImpl implements LoanManager {
             logger.error(businessExceptionLoan.getMessage());
         }
         return false;
+    }
+
+    @Override
+    public String getStatus(String token, int id) {
+        LoanService loanService = new LoanService();
+        GetLoanStatusRequestType requestType = new GetLoanStatusRequestType();
+        requestType.setToken(token);
+        requestType.setId(id);
+
+        try {
+            GetLoanStatusResponseType responseType = loanService.getLoanServicePort().getLoanStatus(requestType);
+            return responseType.getStatus();
+        } catch (BusinessExceptionLoan businessExceptionLoan) {
+            logger.error(businessExceptionLoan.getMessage());
+        }
+
+        return null;
     }
 
 

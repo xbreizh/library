@@ -106,7 +106,7 @@ public class MemberManagerImpl implements MemberManager {
                     loan.setEndDate(date);
                 }
                 loan.setRenewable(loanManager.isRenewable(token, loan.getId()));
-
+                loan.setStatus(loanManager.getStatus(token, loan.getId()));
                 loan.setBook(convertBookTypeOutIntoBook(loanTypeOut.getBookTypeOut()));
                 loanList.add(loan);
                 logger.info("book added to list: " + loan.getBook().getTitle());

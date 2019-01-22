@@ -27,6 +27,8 @@ public class Loan {
 
     private boolean renewable;
 
+    private String status;
+
 
     // getters & setters
 
@@ -83,6 +85,14 @@ public class Loan {
         this.renewable = renewable;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public void setBook(Book book) {
         this.book = book;
 
@@ -97,6 +107,7 @@ public class Loan {
                 ", plannedEndDate=" + plannedEndDate +
                 ", endDate=" + endDate +
                 ", renewable=" + renewable +
+                ", status=" + status +
                 ", book=" + book.getTitle() +
                 '}';
     }

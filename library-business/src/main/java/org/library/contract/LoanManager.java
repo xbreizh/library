@@ -10,5 +10,7 @@ public interface LoanManager {
 
     boolean isRenewable(String token, int id);
 
+    String getStatus(String token, int id);
+
 
 }
