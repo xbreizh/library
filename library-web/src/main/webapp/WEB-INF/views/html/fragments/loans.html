@@ -13,6 +13,7 @@
             <th>ISBN</th>
             <th>Title</th>
             <th></th>
+            <th></th>
         </tr>
         </thead>
 
@@ -25,6 +26,7 @@
                 <td data-th-text="${#dates.format(loan.plannedEndDate, 'dd-MM-yyyy')}"/>
                 <td data-th-text="${loan.book.isbn}"/>
                 <td data-th-text="${loan.book.title}"/>
+                <td data-th-text="${loan.renewable}"/>
                 <td>view Details</td>
             </tr>
             <tr>

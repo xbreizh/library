@@ -3,14 +3,9 @@ package org.library.impl;
 import org.apache.log4j.Logger;
 import org.library.contract.BookManager;
 import org.library.contract.LoanManager;
-import org.library.model.Book;
 import org.library.model.Loan;
-import org.library.model.Member;
-import org.springframework.security.core.context.SecurityContext;
-import org.troparo.entities.loan.GetLoanByCriteriasRequestType;
-import org.troparo.entities.loan.GetLoanByCriteriasResponseType;
-import org.troparo.entities.loan.LoanCriterias;
-import org.troparo.entities.loan.LoanTypeOut;
+import org.troparo.entities.loan.IsRenewableRequestType;
+import org.troparo.entities.loan.IsRenewableResponseType;
 import org.troparo.services.loanservice.BusinessExceptionLoan;
 import org.troparo.services.loanservice.LoanService;
 
@@ -19,11 +14,8 @@ import javax.inject.Named;
 import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
-import javax.xml.ws.soap.SOAPFaultException;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 @Named
 public class LoanManagerImpl implements LoanManager {
@@ -38,10 +30,25 @@ public class LoanManagerImpl implements LoanManager {
 
 
     @Override
-    public boolean renewLoan(Loan loan) {
+    public boolean renewLoan(String token, Loan loan) {
         return false;
     }
 
+    @Override
+    public boolean isRenewable(String token, int id) {
+        LoanService loanService = new LoanService();
+        IsRenewableRequestType requestType = new IsRenewableRequestType();
+        requestType.setToken(token);
+        requestType.setId(id);
+        try {
+            IsRenewableResponseType responseType = loanService.getLoanServicePort().isRenewable(requestType);
+            return responseType.isReturn();
+
+        } catch (BusinessExceptionLoan businessExceptionLoan) {
+            logger.error(businessExceptionLoan.getMessage());
+        }
+        return false;
+    }
 
 
     protected Date convertGregorianCalendarIntoDate(GregorianCalendar gDate) {

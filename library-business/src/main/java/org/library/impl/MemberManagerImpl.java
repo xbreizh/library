@@ -2,7 +2,6 @@ package org.library.impl;
 
 
 import org.apache.log4j.Logger;
-
 import org.library.contract.BookManager;
 import org.library.contract.LoanManager;
 import org.library.contract.MemberManager;
@@ -53,7 +52,7 @@ public class MemberManagerImpl implements MemberManager {
             memberTypeOut = responseType.getMemberTypeOut();
 
             // converting into Member
-            member = convertMemberTypeOutIntoMember(memberTypeOut);
+            member = convertMemberTypeOutIntoMember(token, memberTypeOut);
             logger.info("trying to pass loan to member");
 
             logger.info("member loan size: " + member.getLoanList());
@@ -75,7 +74,7 @@ public class MemberManagerImpl implements MemberManager {
         return member;
     }
 
-    private Member convertMemberTypeOutIntoMember(MemberTypeOut memberTypeOut) {
+    private Member convertMemberTypeOutIntoMember(String token, MemberTypeOut memberTypeOut) {
         Member member = new Member();
         member.setFirstName(memberTypeOut.getFirstName());
         member.setLastName(memberTypeOut.getLastName());
@@ -85,12 +84,12 @@ public class MemberManagerImpl implements MemberManager {
         Date date = convertGregorianCalendarIntoDate(memberTypeOut.getDateJoin().toGregorianCalendar());
         member.setDateJoin(date);
         member.setRole(memberTypeOut.getRole());
-        member.setLoanList(convertLoanListTypeIntoList(memberTypeOut.getLoanListType()));
+        member.setLoanList(convertLoanListTypeIntoList(token, memberTypeOut.getLoanListType()));
         logger.info("member from business: " + member);
         return member;
     }
 
-    private List<Loan> convertLoanListTypeIntoList(LoanListType loanListType) {
+    private List<Loan> convertLoanListTypeIntoList(String token, LoanListType loanListType) {
         List<Loan> loanList = new ArrayList<>();
         logger.info("trying to convert LoanListType into List<Loan>");
         for (LoanTypeOut loanTypeOut : loanListType.getLoanTypeOut()
@@ -105,6 +104,7 @@ public class MemberManagerImpl implements MemberManager {
                 date = convertGregorianCalendarIntoDate(loanTypeOut.getEndDate().toGregorianCalendar());
                 loan.setEndDate(date);
             }
+            loan.setRenewable(loanManager.isRenewable(token, loan.getId()));
 
             loan.setBook(convertBookTypeOutIntoBook(loanTypeOut.getBookTypeOut()));
             loanList.add(loan);

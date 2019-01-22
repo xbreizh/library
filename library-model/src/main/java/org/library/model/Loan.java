@@ -25,6 +25,8 @@ public class Loan {
 
     private Book book;
 
+    private boolean renewable;
+
 
     // getters & setters
 
@@ -73,6 +75,14 @@ public class Loan {
         return book;
     }
 
+    public boolean isRenewable() {
+        return renewable;
+    }
+
+    public void setRenewable(boolean renewable) {
+        this.renewable = renewable;
+    }
+
     public void setBook(Book book) {
         this.book = book;
 
@@ -86,6 +96,7 @@ public class Loan {
                 ", startDate=" + startDate +
                 ", plannedEndDate=" + plannedEndDate +
                 ", endDate=" + endDate +
+                ", renewable=" + renewable +
                 ", book=" + book.getTitle() +
                 '}';
     }

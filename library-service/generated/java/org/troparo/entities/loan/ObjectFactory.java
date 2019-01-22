@@ -38,19 +38,18 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link IsRenewableResponseType }
+     */
+    public IsRenewableResponseType createIsRenewableResponseType() {
+        return new IsRenewableResponseType();
+    }
+
+    /**
      * Create an instance of {@link LoanTypeIn }
      * 
      */
     public LoanTypeIn createLoanTypeIn() {
         return new LoanTypeIn();
-    }
-
-    /**
-     * Create an instance of {@link AddLoanRequestType }
-     * 
-     */
-    public AddLoanRequestType createAddLoanRequestType() {
-        return new AddLoanRequestType();
     }
 
     /**
@@ -67,22 +66,6 @@ public class ObjectFactory {
      */
     public GetLoanByIdRequestType createGetLoanByIdRequestType() {
         return new GetLoanByIdRequestType();
-    }
-
-    /**
-     * Create an instance of {@link AddLoanResponseType }
-     * 
-     */
-    public AddLoanResponseType createAddLoanResponseType() {
-        return new AddLoanResponseType();
-    }
-
-    /**
-     * Create an instance of {@link TerminateLoanRequestType }
-     * 
-     */
-    public TerminateLoanRequestType createTerminateLoanRequestType() {
-        return new TerminateLoanRequestType();
     }
 
     /**
@@ -118,14 +101,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link LoanCriterias }
-     * 
-     */
-    public LoanCriterias createLoanCriterias() {
-        return new LoanCriterias();
-    }
-
-    /**
      * Create an instance of {@link RenewLoanResponseType }
      * 
      */
@@ -134,8 +109,58 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link LoanListResponseType }
+     *
+     */
+    public LoanListResponseType createLoanListResponseType() {
+        return new LoanListResponseType();
+    }
+
+    /**
+     * Create an instance of {@link GetLoanByIdResponseType }
+     */
+    public GetLoanByIdResponseType createGetLoanByIdResponseType() {
+        return new GetLoanByIdResponseType();
+    }
+
+    /**
+     * Create an instance of {@link AddLoanRequestType }
+     */
+    public AddLoanRequestType createAddLoanRequestType() {
+        return new AddLoanRequestType();
+    }
+
+    /**
+     * Create an instance of {@link AddLoanResponseType }
+     */
+    public AddLoanResponseType createAddLoanResponseType() {
+        return new AddLoanResponseType();
+    }
+
+    /**
+     * Create an instance of {@link TerminateLoanRequestType }
+     */
+    public TerminateLoanRequestType createTerminateLoanRequestType() {
+        return new TerminateLoanRequestType();
+    }
+
+    /**
+     * Create an instance of {@link IsRenewableRequestType }
+     */
+    public IsRenewableRequestType createIsRenewableRequestType() {
+        return new IsRenewableRequestType();
+    }
+
+    /**
+     * Create an instance of {@link LoanCriterias }
+     */
+    public LoanCriterias createLoanCriterias() {
+        return new LoanCriterias();
+    }
+
+    /**
      * Create an instance of {@link GetLoanByCriteriasRequestType }
-     * 
+     *
      */
     public GetLoanByCriteriasRequestType createGetLoanByCriteriasRequestType() {
         return new GetLoanByCriteriasRequestType();
@@ -150,27 +175,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link LoanListResponseType }
-     * 
-     */
-    public LoanListResponseType createLoanListResponseType() {
-        return new LoanListResponseType();
-    }
-
-    /**
      * Create an instance of {@link LoanTypeUpdate }
      * 
      */
     public LoanTypeUpdate createLoanTypeUpdate() {
         return new LoanTypeUpdate();
-    }
-
-    /**
-     * Create an instance of {@link GetLoanByIdResponseType }
-     * 
-     */
-    public GetLoanByIdResponseType createGetLoanByIdResponseType() {
-        return new GetLoanByIdResponseType();
     }
 
     /**

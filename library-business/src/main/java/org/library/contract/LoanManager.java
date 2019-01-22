@@ -2,15 +2,13 @@ package org.library.contract;
 
 
 import org.library.model.Loan;
-import org.springframework.security.core.context.SecurityContext;
-
-import java.util.List;
 
 public interface LoanManager {
 
 
+    boolean renewLoan(String token, Loan loan);
 
-    boolean renewLoan(Loan loan);
+    boolean isRenewable(String token, int id);
 
 
 }
