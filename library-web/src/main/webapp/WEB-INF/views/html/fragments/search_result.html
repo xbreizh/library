@@ -1,0 +1,43 @@
+<div th:fragment="search_result" xmlns:th="http://www.w3.org/1999/xhtml">
+
+    Result: <br>
+    <th:block data-th-each="book : ${books}">
+
+        <table class="table table-striped">
+            <tr>
+                <th>ISBN</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Nb Copies</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td data-th-text="${book.isbn}"/>
+                <td data-th-text="${book.title}"/>
+                <td data-th-text="${book.author}"/>
+                <td data-th-text="${book.nbAvailable}"/>
+                <td>Details</td>
+            </tr>
+            <tr>
+                <td colspan="4">
+                    <table class="table table-striped">
+                        <tr>
+                            <th>Publication</th>
+                            <th>Edition</th>
+                            <th>Number Pages</th>
+                            <th>Keywords</th>
+                        </tr>
+                        <tr>
+                            <td data-th-text="${book.publicationYear}"/>
+                            <td data-th-text="${book.edition}"/>
+                            <td data-th-text="${book.nbPages}"/>
+                            <td data-th-text="${book.keywords}"/>
+                        </tr>
+                    </table>
+                </td>
+        </table>
+
+
+    </th:block>
+
+</div>

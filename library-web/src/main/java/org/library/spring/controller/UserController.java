@@ -128,6 +128,9 @@ public class UserController {
         mv.addObject("loanList", m.getLoanList());
         mv.addObject("member", m);
         mv.addObject("books", books);
+        mv.addObject("isbn", ISBN);
+        mv.addObject("title", title);
+        mv.addObject("author", author);
         mv.setViewName("home");
         logger.info("going back to home");
         /*logger.info("loan sample from member: "+m.getLoanList().get(0));*/

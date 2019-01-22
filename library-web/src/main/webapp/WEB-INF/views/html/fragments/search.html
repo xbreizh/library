@@ -6,7 +6,7 @@
                    class="form-control"
                    id="ISBN"
                    name="ISBN"
-                   default=""
+                   th:value="${isbn}"
                    placeholder="ISBN"
                    type="text">
         </div>
@@ -14,7 +14,7 @@
             <input class="form-control"
                    id="Title"
                    name="title"
-                   default=""
+                   th:value="${title}"
                    placeholder="Title"
                    type="text">
         </div>
@@ -22,7 +22,7 @@
             <input class="form-control"
                    id="Author"
                    name="author"
-                   default=""
+                   th:value="${author}"
                    placeholder="Author"
                    type="text">
         </div>
@@ -41,5 +41,5 @@
 
     <br><br>
 
-    <td data-th-text="${books}"/>
+
 </div>
