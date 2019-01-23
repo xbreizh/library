@@ -12,22 +12,46 @@
     <div layout:fragment="content" th:remove="tag">
     <h1>My Space</h1>
 
+        <h2>
+            <button class="btn btn-info" onclick="myFunction('myLoans')">Loans</button>
+            <button class="btn btn-info" onclick="myFunction('myProfile')">Profile</button>
+        </h2>
+        <div id="myLoans" style="display: none">
+            <div th:replace="fragments/loans :: loans"></div>
+        </div>
+        <div id="myProfile" style="display: none">
+            <div th:replace="fragments/table_profile :: profile"></div>
+        </div>
+
 </div>
     <br><br><br>
+    <h2>Search</h2>
     <div th:replace="fragments/search :: search"></div>
     <br><br><br>
     <div th:replace="fragments/search_result :: search_result"></div>
     <br><br><br>
 
 
-    <div th:replace="fragments/table_profile :: profile"></div>
+
 
     <br><br><br>
 
-    <div th:replace="fragments/loans :: loans"></div>
 </div>
 
 </body>
 <div th:replace="fragments/header :: foot"></div>
 
+
+<script>
+    function myFunction(t) {
+        var c = document.getElementById(t).children;
+        var x = c[0];
+
+        if (x.style.display === "none") {
+            x.style.display = "block";
+        } else {
+            x.style.display = "none";
+        }
+    }
+</script>
 </html>

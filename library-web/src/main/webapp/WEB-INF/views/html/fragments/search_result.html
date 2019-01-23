@@ -16,28 +16,34 @@
                 <td data-th-text="${book.title}"/>
                 <td data-th-text="${book.author}"/>
                 <td data-th-text="${book.nbAvailable}"/>
-                <td>Details</td>
             </tr>
-            <tr>
-                <td colspan="4">
-                    <table class="table table-striped">
-                        <tr>
-                            <th>Publication</th>
-                            <th>Edition</th>
-                            <th>Number Pages</th>
-                            <th>Keywords</th>
-                        </tr>
-                        <tr>
-                            <td data-th-text="${book.publicationYear}"/>
-                            <td data-th-text="${book.edition}"/>
-                            <td data-th-text="${book.nbPages}"/>
-                            <td data-th-text="${book.keywords}"/>
-                        </tr>
-                    </table>
-                </td>
         </table>
+        <div>
+            <button class="btn btn btn-lg btn-block" onclick="hideKids(this)">Details</button>
+            </td>
+            <table class="table table-striped ">
+                <tr>
+                    <th>Publication</th>
+                    <th>Edition</th>
+                    <th>Number Pages</th>
+                    <th>Keywords</th>
+                </tr>
+                <tr>
+                    <td data-th-text="${book.publicationYear}"/>
+                    <td data-th-text="${book.edition}"/>
+                    <td data-th-text="${book.nbPages}"/>
+                    <td data-th-text="${book.keywords}"/>
+                </tr>
+            </table>
+        </div>
 
 
-    </th:block>
-
-</div>
+        <script>
+            function hideKids(item) {
+// Make sure the tags are setup correctly, if not just return
+                if (!item.parentNode.getElementsByTagName("table")[0]) return;
+                var x = item.parentNode.getElementsByTagName("table")[0];
+// if already visible, make disappear, otherwise reappear
+                x.style.display = (x.style.display == "") ? 'none' : "";
+            }
+        </script>
