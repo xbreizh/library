@@ -1,49 +1,31 @@
 <div th:fragment="search_result" xmlns:th="http://www.w3.org/1999/xhtml">
 
-    Result: <br>
-    <th:block data-th-each="book : ${books}">
 
-        <table class="table table-striped">
-            <tr>
-                <th>ISBN</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Available</th>
-                <th></th>
-            </tr>
-            <tr>
+    <table class="table table-striped">
+        <tr>
+            <th>ISBN</th>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Available</th>
+        </tr>
+        <th:block data-th-each="book : ${books}">
+            <tr th:style="${book.nbAvailable == 0} ? 'color:red' : 'color:green'">
                 <td data-th-text="${book.isbn}"/>
                 <td data-th-text="${book.title}"/>
                 <td data-th-text="${book.author}"/>
                 <td data-th-text="${book.nbAvailable}"/>
             </tr>
-        </table>
-        <div>
-            <button class="btn btn btn-lg btn-block" onclick="hideKids(this)">Details</button>
-            </td>
-            <table class="table table-striped ">
-                <tr>
-                    <th>Publication</th>
-                    <th>Edition</th>
-                    <th>Number Pages</th>
-                    <th>Keywords</th>
-                </tr>
-                <tr>
-                    <td data-th-text="${book.publicationYear}"/>
-                    <td data-th-text="${book.edition}"/>
-                    <td data-th-text="${book.nbPages}"/>
-                    <td data-th-text="${book.keywords}"/>
-                </tr>
-            </table>
-        </div>
+            <!-- onclick="toggle_display('1234567824')"-->
+            <!-- <tr th:id="${book.isbn}" style="display: inline">
+                 <td data-th-text="${book.publicationYear}"/>
+                 <td data-th-text="${book.edition}"/>
+                 <td data-th-text="${book.nbPages}"/>
+                 <td data-th-text="${book.keywords}"/>
+             </tr>-->
+        </th:block>
+    </table>
+
+</div>
 
 
-        <script>
-            function hideKids(item) {
-// Make sure the tags are setup correctly, if not just return
-                if (!item.parentNode.getElementsByTagName("table")[0]) return;
-                var x = item.parentNode.getElementsByTagName("table")[0];
-// if already visible, make disappear, otherwise reappear
-                x.style.display = (x.style.display == "") ? 'none' : "";
-            }
-        </script>
+</div>
