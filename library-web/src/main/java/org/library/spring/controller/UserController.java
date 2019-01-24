@@ -2,6 +2,7 @@ package org.library.spring.controller;
 
 import org.apache.log4j.Logger;
 import org.library.contract.BookManager;
+import org.library.contract.LoanManager;
 import org.library.contract.MemberManager;
 import org.library.model.Book;
 import org.library.model.Member;
@@ -25,6 +26,8 @@ public class UserController {
     MemberManager memberManager;
     @Inject
     BookManager bookManager;
+    @Inject
+    LoanManager loanManager;
 
     private Logger logger = Logger.getLogger(UserController.class);
 
@@ -63,6 +66,20 @@ public class UserController {
         mv.setViewName("login");
         return mv;
     }
+
+    @PostMapping("/renew")
+    public ModelAndView renew(ModelAndView mv, String id) {
+        SecurityContext context = SecurityContextHolder.getContext();
+        String token = context.getAuthentication().getDetails().toString();
+        logger.info("trying to renew: " + id);
+        int idLoan = Integer.parseInt(id);
+        loanManager.renewLoan(token, idLoan);
+
+
+        return new ModelAndView("redirect:/");
+    }
+
+
 
     @GetMapping("/connect")
     public String user(Principal principal) {

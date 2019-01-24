@@ -1,7 +1,6 @@
 <div th:fragment="loans" xmlns:th="http://www.w3.org/1999/xhtml">
 
 
-
     <table class="table table-striped">
         <thead>
         <tr>
@@ -27,20 +26,33 @@
 
 
             <td data-th-text="${loan.id}"/>
-                <td data-th-text="${#dates.format(loan.startDate, 'dd-MM-yyyy')}"/>
-                <td data-th-text="${#dates.format(loan.plannedEndDate, 'dd-MM-yyyy')}"/>
-                <td data-th-text="${loan.book.isbn}"/>
-                <td data-th-text="${loan.book.title}"/>
-                <td data-th-text="${loan.status}"/>
+            <td data-th-text="${#dates.format(loan.startDate, 'dd-MM-yyyy')}"/>
+            <td data-th-text="${#dates.format(loan.plannedEndDate, 'dd-MM-yyyy')}"/>
+            <td data-th-text="${loan.book.isbn}"/>
+            <td data-th-text="${loan.book.title}"/>
+            <td data-th-text="${loan.status}"/>
             <!-- <td data-th-text="${loan.renewable} == true ? 'renew' : 'nope'"/>-->
             <td>
                 <div th:if="${loan.renewable} == true">
                     <div>
-                        <button class="btn btn-info">Renew</button>
+                        <form method="post" th:action="@{/renew}" th:object="${renew}">
+
+                            <button class="btn btn-outline-info">
+                                <input id="id" name="id" th:value="${loan.id}" type="hidden">
+                            </button>
+
+
+                            <input type="submit" value="Renew">
+
+
+                        </form>
                     </div>
+
                 </div>
                 <div th:unless="${loan.renewable}">
-                    <div>Hi, User</div>
+                    <button class="btn btn-outline-warning">
+                        Renewed
+                    </button>
                 </div>
             </td>
             </tr>

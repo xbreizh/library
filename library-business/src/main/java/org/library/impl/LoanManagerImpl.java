@@ -3,11 +3,7 @@ package org.library.impl;
 import org.apache.log4j.Logger;
 import org.library.contract.BookManager;
 import org.library.contract.LoanManager;
-import org.library.model.Loan;
-import org.troparo.entities.loan.GetLoanStatusRequestType;
-import org.troparo.entities.loan.GetLoanStatusResponseType;
-import org.troparo.entities.loan.IsRenewableRequestType;
-import org.troparo.entities.loan.IsRenewableResponseType;
+import org.troparo.entities.loan.*;
 import org.troparo.services.loanservice.BusinessExceptionLoan;
 import org.troparo.services.loanservice.LoanService;
 
@@ -32,7 +28,23 @@ public class LoanManagerImpl implements LoanManager {
 
 
     @Override
-    public boolean renewLoan(String token, Loan loan) {
+    public boolean renewLoan(String token, int id) {
+        logger.info("trying to renew: " + id);
+        LoanService loanService = new LoanService();
+        RenewLoanRequestType renewLoanRequestType = new RenewLoanRequestType();
+        renewLoanRequestType.setToken(token);
+        renewLoanRequestType.setId(id);
+        RenewLoanResponseType responseType = new RenewLoanResponseType();
+        try {
+            responseType = loanService.getLoanServicePort().renewLoan(renewLoanRequestType);
+        } catch (BusinessExceptionLoan businessExceptionLoan) {
+            logger.error(businessExceptionLoan.getMessage());
+        }
+        if (responseType.isReturn()) {
+            logger.info("renew ok for: " + id);
+        } else {
+            logger.info("issue renewing for: " + id);
+        }
         return false;
     }
 

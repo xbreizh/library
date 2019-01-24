@@ -13,8 +13,8 @@
     <h1>My Space</h1>
 
         <h2>
-            <button class="btn btn-info" onclick="toggle_display('myLoans')">Loans</button>
-            <button class="btn btn-info" onclick="toggle_display('myProfile')">Profile</button>
+            <button class="btn btn-info" onclick="toggle_displays('myLoans', 'myProfile')">Loans</button>
+            <button class="btn btn-info" onclick="toggle_displays('myProfile', 'myLoans')">Profile</button>
         </h2>
         <div id="myLoans" style="display: none">
             <div th:replace="fragments/loans :: loans"></div>
@@ -43,13 +43,20 @@
 
 
 <script>
-    function toggle_display(t) {
+    function toggle_displays(t, d) {
         var x = document.getElementById(t);
+        var y = document.getElementById(d);
 
-        if (x.style.display === "none") {
+        if (x.style.display === "none" && y.style.display === "block") {
+            y.style.display = "none";
             x.style.display = "block";
-        } else {
+
+        } else if (x.style.display === "block") {
             x.style.display = "none";
+
+        } else {
+            x.style.display = "block";
+
         }
     }
 </script>
