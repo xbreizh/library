@@ -10,8 +10,7 @@
             <th>Return Due On</th>
             <th>ISBN</th>
             <th>Title</th>
-            <th></th>
-            <th></th>
+            <th>Status</th>
             <th></th>
         </tr>
         </thead>
@@ -19,26 +18,47 @@
 
         <tbody>
         <th:block data-th-each="loan : ${member.loanList}">
-            <tr>
-                <td data-th-text="${loan.id}"/>
+            <div th:if="${loan.status} == 'OVERDUE'">
+                <tr style="color: red">
+            </div>
+            <div th:unless="${loan.status}">
+                <tr style="color: blue">
+            </div>
+
+
+            <td data-th-text="${loan.id}"/>
                 <td data-th-text="${#dates.format(loan.startDate, 'dd-MM-yyyy')}"/>
                 <td data-th-text="${#dates.format(loan.plannedEndDate, 'dd-MM-yyyy')}"/>
                 <td data-th-text="${loan.book.isbn}"/>
                 <td data-th-text="${loan.book.title}"/>
-                <td data-th-text="${loan.renewable}"/>
                 <td data-th-text="${loan.status}"/>
-                <td>view Details</td>
+            <!-- <td data-th-text="${loan.renewable} == true ? 'renew' : 'nope'"/>-->
+            <td>
+                <div th:if="${loan.renewable} == true">
+                    <div>
+                        <button class="btn btn-info">Renew</button>
+                    </div>
+                </div>
+                <div th:unless="${loan.renewable}">
+                    <div>Hi, User</div>
+                </div>
+            </td>
             </tr>
-            <tr>
-                <td colspan="5">
-                    <div th:replace="fragments/book_details :: book_details"/>
 
-                </td>
-            </tr>
         </th:block>
         </tbody>
     </table>
+    <script>
+        function toggle_table(t) {
+            var x = document.getElementById(t);
 
+            if (x.style.display === "none") {
+                x.style.display = "table";
+            } else {
+                x.style.display = "none";
+            }
+        }
+    </script>
 
     <!--  <th:block data-th-each="loan : ${member.loanList}">
           <td data-th-text="${loan.book}"/>
