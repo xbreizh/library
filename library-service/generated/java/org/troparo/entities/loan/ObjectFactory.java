@@ -39,6 +39,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLoanStatusRequestType }
+     * 
      */
     public GetLoanStatusRequestType createGetLoanStatusRequestType() {
         return new GetLoanStatusRequestType();
@@ -46,7 +47,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link IsRenewableResponseType }
-     *
+     * 
      */
     public IsRenewableResponseType createIsRenewableResponseType() {
         return new IsRenewableResponseType();
@@ -118,7 +119,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link LoanListResponseType }
-     *
+     * 
      */
     public LoanListResponseType createLoanListResponseType() {
         return new LoanListResponseType();
@@ -126,7 +127,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLoanByIdResponseType }
-     *
+     * 
      */
     public GetLoanByIdResponseType createGetLoanByIdResponseType() {
         return new GetLoanByIdResponseType();
@@ -134,7 +135,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddLoanRequestType }
-     *
+     * 
      */
     public AddLoanRequestType createAddLoanRequestType() {
         return new AddLoanRequestType();
@@ -142,6 +143,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLoanStatusResponseType }
+     * 
      */
     public GetLoanStatusResponseType createGetLoanStatusResponseType() {
         return new GetLoanStatusResponseType();
@@ -149,7 +151,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link AddLoanResponseType }
-     *
+     * 
      */
     public AddLoanResponseType createAddLoanResponseType() {
         return new AddLoanResponseType();
@@ -157,7 +159,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link TerminateLoanRequestType }
-     *
+     * 
      */
     public TerminateLoanRequestType createTerminateLoanRequestType() {
         return new TerminateLoanRequestType();
@@ -165,7 +167,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link IsRenewableRequestType }
-     *
+     * 
      */
     public IsRenewableRequestType createIsRenewableRequestType() {
         return new IsRenewableRequestType();
@@ -173,7 +175,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link LoanCriterias }
-     *
+     * 
      */
     public LoanCriterias createLoanCriterias() {
         return new LoanCriterias();
@@ -181,7 +183,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link GetLoanByCriteriasRequestType }
-     *
+     * 
      */
     public GetLoanByCriteriasRequestType createGetLoanByCriteriasRequestType() {
         return new GetLoanByCriteriasRequestType();
@@ -213,7 +215,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link Integer }{@code >}}
-     *
+     * 
      */
     @XmlElementDecl(namespace = "http://troparo.org/entities/loan", name = "Id")
     public JAXBElement<Integer> createId(Integer value) {
@@ -222,6 +224,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
      */
     @XmlElementDecl(namespace = "http://troparo.org/entities/loan", name = "Login")
     public JAXBElement<String> createLogin(String value) {
@@ -230,7 +233,7 @@ public class ObjectFactory {
 
     /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     *
+     * 
      */
     @XmlElementDecl(namespace = "http://troparo.org/entities/loan", name = "Token")
     public JAXBElement<String> createToken(String value) {
