@@ -1,11 +1,6 @@
-FROM maven:3.5.2-jdk-8-alpine AS MAVEN_TOOL_CHAIN
-COPY library-service/pom.xml /tmp/
-COPY library-service/generated /tmp/generated/
-WORKDIR /tmp
-RUN mvn package
-
-FROM tomcat:9.0.14-jre8-alpine
+FROM tomcat:9.0.14-jre8
 RUN rm -rf /usr/local/tomcat/webapps/*
 
-COPY ./library-web/target/library-web-1.0-SNAPSHOT.war /usr/local/tomcat/webapps/library-web-1.0-SNAPSHOT.war
+COPY ./library-web/target/library-webapp.war /usr/local/tomcat/webapps/library-webapp.war
+#COPY ./library-technical/src/main/resources/* /usr/app/resources/
 CMD ["catalina.sh","run"]
